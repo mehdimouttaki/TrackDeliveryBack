@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface OrderService {
-    SearchResponse<OrderResponse> findAll(Integer pageNum, Integer pageSize, String sortBy, Integer sortOrder, Boolean isPageable, List<SearchRequest> searchRequests);
+    SearchResponse<OrderResponse> searchOrders(Integer pageNum, Integer pageSize, String sortBy, Integer sortOrder, Boolean isPageable, List<SearchRequest> searchRequests);
 
-    ResponseEntity<OrderResponse> update(Long orderId, OrderRequest orderRequest) throws Exception;
+    ResponseEntity<OrderResponse> updateOrder(Long orderId, OrderRequest orderRequest) throws Exception;
 }

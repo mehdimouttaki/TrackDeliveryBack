@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public SearchResponse<OrderResponse> findAll(Integer pageNum, Integer pageSize, String sortBy, Integer sortOrder, Boolean isPageable, List<SearchRequest> searchRequests) {
+    public SearchResponse<OrderResponse> searchOrders(Integer pageNum, Integer pageSize, String sortBy, Integer sortOrder, Boolean isPageable, List<SearchRequest> searchRequests) {
         String username = JwtSecurityUtils.getAuthenticatedUsername();
         Client client = clientRepository.findByEmail(username).orElseThrow();
 
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ResponseEntity<OrderResponse> update(Long orderId, OrderRequest orderRequest) {
+    public ResponseEntity<OrderResponse> updateOrder(Long orderId, OrderRequest orderRequest) {
         Orders orders = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
 

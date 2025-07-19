@@ -1,8 +1,6 @@
 package com.trackdelivery.dto.response;
 
-import com.trackdelivery.entity.Client;
 import com.trackdelivery.enums.State;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +29,7 @@ public class OrderResponse {
 
     private String orderNumberTemporary;
 
-    private ClientBasicAll client;
+    private ClientBasicDto client;
 
     private Boolean canceled;
 
@@ -46,7 +44,7 @@ public class OrderResponse {
         this.state = state;
         this.orderNumber = orderNumber;
         this.orderNumberTemporary = orderNumberTemporary;
-        this.client = new ClientBasicAll(clientId,clientFirstName,clientLastName,clientActive);
+        this.client = new ClientBasicDto(clientId,clientFirstName,clientLastName,clientActive);
         this.canceled = canceled;
         this.active = active;
     }

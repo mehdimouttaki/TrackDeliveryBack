@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("order")
+@RequestMapping("orders")
 public class OrderController {
     private final OrderService orderService;
 
@@ -30,23 +29,23 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/filter/table/all")
-    public ResponseEntity<SearchResponse<OrderResponse>> getUserResponse(@RequestParam(defaultValue = "0") Integer pageNum,
+    @PostMapping("/search")
+    public ResponseEntity<SearchResponse<OrderResponse>> searchOrders(@RequestParam(defaultValue = "0") Integer pageNum,
                                                                            @RequestParam(defaultValue = "10") Integer pageSize,
                                                                            @RequestParam(defaultValue = "id") String sortBy,
                                                                            @RequestParam(defaultValue = "1") Integer sortOrder,
                                                                            @RequestParam(defaultValue = "false") Boolean isPageable,
                                                                            @RequestBody List<SearchRequest> searchRequests) throws IllegalAccessException, JsonProcessingException {
 
-        SearchResponse<OrderResponse> searchResponse = orderService.findAll(pageNum, pageSize, sortBy, sortOrder, isPageable, searchRequests);
+        SearchResponse<OrderResponse> searchResponse = orderService.searchOrders(pageNum, pageSize, sortBy, sortOrder, isPageable, searchRequests);
         return ResponseEntity.ok(searchResponse);
 
     }
 
 
     @PutMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> update(@PathVariable() Long orderId, @Validated @RequestBody OrderRequest orderRequest) throws Exception {
-        return orderService.update(orderId, orderRequest);
+    public ResponseEntity<OrderResponse> updateOrder(@PathVariable() Long orderId, @Validated @RequestBody OrderRequest orderRequest) throws Exception {
+        return orderService.updateOrder(orderId, orderRequest);
     }
 
 }
