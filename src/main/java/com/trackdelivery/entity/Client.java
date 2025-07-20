@@ -35,7 +35,7 @@ public class Client  implements UserDetails,Serializable {
 
     private String lastName;
 
-    private String email;
+    private String username;
 
     private String phoneNumber;
 
@@ -56,10 +56,7 @@ public class Client  implements UserDetails,Serializable {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
+
 
     @Override
     public boolean isAccountNonExpired() {

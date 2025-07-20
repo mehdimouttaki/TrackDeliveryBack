@@ -47,7 +47,7 @@ public class AuthServiceImplTest {
         request.setPassword("password123");
 
         Client client = new Client();
-        client.setEmail("test@example.com");
+        client.setUsername("test@example.com");
         // set other properties if needed
 
         String fakeJwtToken = "fake-jwt-token";
@@ -57,7 +57,7 @@ public class AuthServiceImplTest {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(authenticationMock);
 
-        when(clientRepository.findByEmail("test@example.com")).thenReturn(Optional.of(client));
+        when(clientRepository.findByUsername("test@example.com")).thenReturn(Optional.of(client));
         when(jwtService.generateToken(client)).thenReturn(fakeJwtToken);
 
         // Call the method to test
@@ -68,7 +68,7 @@ public class AuthServiceImplTest {
         assertEquals(fakeJwtToken, response.getToken());
 
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(clientRepository).findByEmail("test@example.com");
+        verify(clientRepository).findByUsername("test@example.com");
         verify(jwtService).generateToken(client);
     }
 
@@ -83,7 +83,7 @@ public class AuthServiceImplTest {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mock(Authentication.class));
         // Mock clientRepository to return empty to simulate user not found
-        when(clientRepository.findByEmail("notfound@example.com")).thenReturn(Optional.empty());
+        when(clientRepository.findByUsername("notfound@example.com")).thenReturn(Optional.empty());
 
         // Assert exception thrown (NoSuchElementException from orElseThrow)
         assertThrows(java.util.NoSuchElementException.class, () -> {

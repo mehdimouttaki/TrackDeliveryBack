@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public SearchResponse<OrderResponse> searchOrders(Integer pageNum, Integer pageSize, String sortBy, Integer sortOrder, Boolean isPageable, List<SearchRequest> searchRequests) {
         String username = JwtSecurityUtils.getAuthenticatedUsername();
-        Client client = clientRepository.findByEmail(username).orElseThrow();
+        Client client = clientRepository.findByUsername(username).orElseThrow();
 
         SearchOrderRequestValues searchOrderRequestValues = new SearchOrderRequestValues();
 
